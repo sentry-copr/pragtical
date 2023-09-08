@@ -1,16 +1,19 @@
+%global         realname pragtical
+%global         build_timestamp %{lua: print(os.date("%Y%m%d"))}
+
 %bcond_without  luajit
 
 %global         widget_commit   db1c8cdc52f79753e14016a95ea3967fd833c388
 
-Name:           pragtical
-Version:        3.1.1
-Release:        1%{?dist}
+Name:           %{realname}-nightly
+Version:        nightly
+Release:        %{build_timestamp}%{?dist}
 Summary:        practical and pragmatic code editor.
 
 License:        MIT
 URL:            https://github.com/pragtical/pragtical
-Source0:        https://github.com/pragtical/pragtical/archive/refs/tags/v%{version}.tar.gz#/%{name}-%{version}.tar.gz
-Source1:        https://github.com/pragtical/widget/archive/%{widget_commit}.tar.gz#/%{name}-widget-%{widget_commit}.tar.gz
+Source0:        https://github.com/pragtical/pragtical/archive/refs/heads/master.tar.gz#/%{name}-%{build_timestamp}.tar.gz
+Source1:        https://github.com/pragtical/widget/archive/refs/heads/master.tar.gz#/%{name}-widget-%{build_timestamp}.tar.gz
 
 BuildRequires: gcc
 BuildRequires: meson
@@ -25,16 +28,18 @@ BuildRequires: pkgconfig(sdl2)
 BuildRequires: pkgconfig(uchardet)
 BuildRequires: desktop-file-utils
 
+Conflicts:      %{realname}
+
 %description
 Pragtical is a code editor which was forked from Lite XL (also a
 fork of lite) written mostly in Lua with a focus on been practical
 rather than minimalist.
 
 %prep
-%autosetup -a 1
+%autosetup -n %{realname}-master -a 1
 
 rmdir data/widget
-mv widget-%{widget_commit} data/widget
+mv widget-master data/widget
 
 %build
 %meson \
@@ -61,8 +66,3 @@ mv widget-%{widget_commit} data/widget
 %{_metainfodir}/org.pragtical.pragtical.appdata.xml
 %license LICENSE
 %{_docdir}/pragtical/licenses.md
-
-%changelog
-* Fri Sep 08 2023 Jan Drögehoff <sentrycraft123@gmail.com> - 3.1.1-1
-- Initial spec
-
