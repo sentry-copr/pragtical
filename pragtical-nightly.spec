@@ -3,8 +3,6 @@
 
 %bcond_without  luajit
 
-%global         widget_commit   db1c8cdc52f79753e14016a95ea3967fd833c388
-
 Name:           %{realname}-nightly
 Version:        nightly
 Release:        %{build_timestamp}%{?dist}
@@ -36,8 +34,9 @@ fork of lite) written mostly in Lua with a focus on been practical
 rather than minimalist.
 
 %prep
-%autosetup -n %{realname}-master -a 1
+%autosetup -n %{realname}-master
 
+%autosetup -n %{realname}-master -T -D -a 1
 rmdir data/widget
 mv widget-master data/widget
 
@@ -51,6 +50,7 @@ mv widget-master data/widget
 %else
     -Djit=false \
 %endif
+    -Dppm=false \
     -Darch_tuple=%{_arch}-linux
 
 %meson_build
