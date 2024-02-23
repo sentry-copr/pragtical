@@ -3,7 +3,7 @@
 %global         widget_commit   a5f14c250c47b6b3a62ff8888e2b4858bb32964e
 
 Name:           pragtical
-Version:        3.1.2
+Version:        3.2.2
 Release:        1%{?dist}
 Summary:        practical and pragmatic code editor.
 
@@ -46,6 +46,7 @@ mv widget-%{widget_commit} data/widget
 %else
     -Djit=false \
 %endif
+    -Dppm=false \
     -Darch_tuple=%{_arch}-linux
 
 %meson_build
@@ -63,6 +64,9 @@ mv widget-%{widget_commit} data/widget
 %{_docdir}/pragtical/licenses.md
 
 %changelog
+* Fri Feb 23 2024 Jan Drögehoff <sentrycraft123@gmail.com> - 3.2.2-1
+- Update to 3.2.2
+
 * Fri Oct 13 2023 Jan Drögehoff <sentrycraft123@gmail.com> - 3.1.2-1
 - Update to 3.1.2
 
