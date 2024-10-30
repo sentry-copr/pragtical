@@ -1,9 +1,9 @@
 %bcond_without  luajit
 
-%global         widget_commit   a5f14c250c47b6b3a62ff8888e2b4858bb32964e
+%global         widget_commit   a2637c377da8a92eb4bd966d12ab6a45e71c4e43
 
 Name:           pragtical
-Version:        3.4.1
+Version:        3.5.1
 Release:        1%{?dist}
 Summary:        practical and pragmatic code editor.
 
@@ -33,7 +33,6 @@ rather than minimalist.
 %prep
 %autosetup -a 1
 
-rmdir data/widget
 mv widget-%{widget_commit} data/widget
 
 %build
@@ -64,6 +63,9 @@ mv widget-%{widget_commit} data/widget
 %{_docdir}/pragtical/licenses.md
 
 %changelog
+* Wed Oct 30 2024 Jan200101 <sentrycraft123@gmail.com> - 3.5.1-1
+- Update to 3.5.1
+
 * Sun Jul 14 2024 Jan200101 <sentrycraft123@gmail.com> - 3.4.1-1
 - Update to 3.4.1
 

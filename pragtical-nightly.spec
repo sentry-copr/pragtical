@@ -37,7 +37,6 @@ rather than minimalist.
 %autosetup -n %{realname}-master
 
 %autosetup -n %{realname}-master -T -D -a 1
-rmdir data/widget
 mv widget-master data/widget
 
 %build
