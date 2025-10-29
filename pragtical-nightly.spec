@@ -18,11 +18,11 @@ BuildRequires: meson
 %if %{with luajit}
 BuildRequires: pkgconfig(luajit)
 %else
-BuildRequires: (pkgconfig(lua) >= 5.4 with pkgconfig(lua) < 5.5)
+BuildRequires: (pkgconfig(lua) >= 5.2 with pkgconfig(lua) < 5.5)
 %endif
 BuildRequires: pkgconfig(libpcre2-8)
 BuildRequires: pkgconfig(freetype2)
-BuildRequires: pkgconfig(sdl2)
+BuildRequires: pkgconfig(sdl3)
 BuildRequires: pkgconfig(uchardet)
 BuildRequires: desktop-file-utils
 
@@ -42,6 +42,7 @@ mv widget-master data/widget
 %build
 %meson \
     -Duse_system_lua=true \
+    -Drepl_history=false \
     -Dextra_colors=false \
     -Dextra_languages=false \
 %if %{with luajit}
@@ -61,7 +62,7 @@ mv widget-master data/widget
 %{_bindir}/pragtical
 %{_datadir}/pragtical
 %{_datadir}/icons/hicolor/scalable/apps/pragtical.svg
-%{_datadir}/applications/org.pragtical.pragtical.desktop
-%{_metainfodir}/org.pragtical.pragtical.appdata.xml
+%{_datadir}/applications/dev.pragtical.Pragtical.desktop
+%{_metainfodir}/dev.pragtical.Pragtical.appdata.xml
 %license LICENSE
 %{_docdir}/pragtical/licenses.md
