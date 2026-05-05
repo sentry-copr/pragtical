@@ -13,7 +13,7 @@ URL:            https://github.com/pragtical/pragtical
 Source0:        https://github.com/pragtical/pragtical/archive/refs/heads/master.tar.gz#/%{name}-%{build_timestamp}.tar.gz
 Source1:        https://github.com/pragtical/widget/archive/refs/heads/master.tar.gz#/%{name}-widget-%{build_timestamp}.tar.gz
 
-BuildRequires: gcc
+BuildRequires: gcc gcc-c++
 BuildRequires: meson
 %if %{with luajit}
 BuildRequires: pkgconfig(luajit)
@@ -23,6 +23,7 @@ BuildRequires: (pkgconfig(lua) >= 5.2 with pkgconfig(lua) < 5.5)
 BuildRequires: pkgconfig(libpcre2-8)
 BuildRequires: pkgconfig(freetype2)
 BuildRequires: pkgconfig(sdl3)
+BuildRequires: pkgconfig(sdl3-image)
 BuildRequires: pkgconfig(uchardet)
 BuildRequires: desktop-file-utils
 

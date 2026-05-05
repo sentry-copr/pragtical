@@ -1,9 +1,9 @@
 %bcond_without  luajit
 
-%global         widget_commit   a2637c377da8a92eb4bd966d12ab6a45e71c4e43
+%global         widget_commit   73469f651b3d362b70363c59e42de358c5d199f6
 
 Name:           pragtical
-Version:        3.5.1
+Version:        3.9.0
 Release:        1%{?dist}
 Summary:        practical and pragmatic code editor.
 
@@ -12,16 +12,17 @@ URL:            https://github.com/pragtical/pragtical
 Source0:        https://github.com/pragtical/pragtical/archive/refs/tags/v%{version}.tar.gz#/%{name}-%{version}.tar.gz
 Source1:        https://github.com/pragtical/widget/archive/%{widget_commit}.tar.gz#/%{name}-widget-%{widget_commit}.tar.gz
 
-BuildRequires: gcc
+BuildRequires: gcc gcc-c++
 BuildRequires: meson
 %if %{with luajit}
 BuildRequires: pkgconfig(luajit)
 %else
-BuildRequires: (pkgconfig(lua) >= 5.4 with pkgconfig(lua) < 5.5)
+BuildRequires: (pkgconfig(lua) >= 5.2 with pkgconfig(lua) < 5.5)
 %endif
 BuildRequires: pkgconfig(libpcre2-8)
 BuildRequires: pkgconfig(freetype2)
-BuildRequires: pkgconfig(sdl2)
+BuildRequires: pkgconfig(sdl3)
+BuildRequires: pkgconfig(sdl3-image)
 BuildRequires: pkgconfig(uchardet)
 BuildRequires: desktop-file-utils
 
@@ -38,6 +39,7 @@ mv widget-%{widget_commit} data/widget
 %build
 %meson \
     -Duse_system_lua=true \
+    -Drepl_history=false \
     -Dextra_colors=false \
     -Dextra_languages=false \
 %if %{with luajit}
@@ -57,12 +59,15 @@ mv widget-%{widget_commit} data/widget
 %{_bindir}/pragtical
 %{_datadir}/pragtical
 %{_datadir}/icons/hicolor/scalable/apps/pragtical.svg
-%{_datadir}/applications/org.pragtical.pragtical.desktop
-%{_metainfodir}/org.pragtical.pragtical.appdata.xml
+%{_datadir}/applications/dev.pragtical.Pragtical.desktop
+%{_metainfodir}/dev.pragtical.Pragtical.appdata.xml
 %license LICENSE
 %{_docdir}/pragtical/licenses.md
 
 %changelog
+* Tue May 05 2026 Jan200101 <sentrycraft123@gmail.com> - 3.9.0-1
+- Update to 3.9.0
+
 * Wed Oct 30 2024 Jan200101 <sentrycraft123@gmail.com> - 3.5.1-1
 - Update to 3.5.1
 
